@@ -1,0 +1,5 @@
+{
+  "components": "./src/App/components/",
+  "format": "tsx",
+  "style": "styled-components"
+}
