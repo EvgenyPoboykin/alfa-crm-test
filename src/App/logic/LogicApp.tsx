@@ -1,12 +1,30 @@
 import { useEffect, useState } from 'react';
+// import { OptionsData } from './logger';
 import { Dummy } from '../state/Dummy';
 
 export const LogicApp = () => {
     const [state, setState] = useState<any>();
 
+    // const url: string = `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_ADRESS}customer/index`;
+
+    // const GetDataFetch = async () => {
+    //     const rawData = await fetch(url, OptionsData);
+    //     const data = await rawData.json();
+    //     console.log(data);
+    //     // .then((response) => {
+    //     //     response.json();
+    //     // })
+    //     // .then((body) => {
+    //     //     console.log('from db', body);
+    //     // })
+    //     // .catch((error) => {
+    //     //     console.log('err', error.message);
+    //     // });
+    // };
+
     useEffect(() => {
         setState(Dummy);
-
+        // GetDataFetch();
         // eslint-disable-next-line
     }, []);
 
@@ -14,28 +32,3 @@ export const LogicApp = () => {
 
     return { state };
 };
-
-// const url: string = 'https://test.s20.online/v2api/customer/index';
-
-// const data: {} = {
-//     'X-ALFACRM-TOKEN': 'c9b4e671abd208e8f9ac613d635fa152',
-//     'Content-Type': 'application/json',
-// };
-
-// const options: {} = {
-//     mode: 'no-cors',
-//     header: data,
-//     method: 'POST',
-// };
-
-// const GetDataFetch = async () => {
-//     await fetch(url, options)
-//         .then((response) => {
-//             console.log(response.json());
-//         })
-//         .catch((error) => {
-//             console.log('err', error.message);
-//         });
-// };
-
-// GetDataFetch();
