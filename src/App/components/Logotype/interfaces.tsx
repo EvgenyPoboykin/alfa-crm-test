@@ -1,2 +1,2 @@
-export interface ILayuots{};
+export interface ILogotype{};
 export interface IContainer{};

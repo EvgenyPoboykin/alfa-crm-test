@@ -1,11 +1,11 @@
 import React, { lazy, memo } from 'react';
-import { Container } from './style';
-import { ILayuots } from './interfaces';
+
+const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
 
 const SearchInput = lazy(() => import('../SearchInput'));
 const ItemList = lazy(() => import('../ItemList'));
 
-const Layuots: React.FC<ILayuots> = memo(() => {
+const Page: React.FC = memo(() => {
     return (
         <Container>
             <SearchInput />
@@ -13,4 +13,4 @@ const Layuots: React.FC<ILayuots> = memo(() => {
         </Container>
     );
 });
-export default Layuots;
+export default Page;
