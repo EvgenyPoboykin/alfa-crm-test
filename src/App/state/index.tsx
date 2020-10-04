@@ -1,11 +1,14 @@
 import { ContextApp, ProviderApp } from './Context';
+import { formObject } from './formObject';
+import { appState } from './appState';
+import { User } from './user';
 
-export interface IFormObject {
-    email: string;
-    password: string;
-    rememberMe: boolean;
-}
+import * as inter from './interfaces';
 
-const formObject: IFormObject = { email: '', password: '', rememberMe: false };
+export type IProvider = inter.IProvider;
+export type IData = inter.IData;
+export type IItem = inter.IItem;
+export type IFormObject = inter.IFormObject;
+export type IAppState = inter.IAppState;
 
-export { ContextApp, ProviderApp, formObject };
+export { ContextApp, ProviderApp, formObject, appState, User };

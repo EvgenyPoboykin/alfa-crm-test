@@ -1,50 +1,97 @@
-import { useEffect, useState } from 'react';
-// import { OptionsData } from './logger';
-import { Dummy } from '../state/Dummy';
-import { formObject, IFormObject } from '../state';
+import { useState } from 'react';
+
+import {
+    LoginOptionsData,
+    CustomerOptionsData,
+    CreateCustomerOptionsData,
+    loginUrl,
+    customerUrl,
+    createUrl,
+} from './logger';
+import { appState, IAppState, User } from '../state';
+import { IItem } from '../state/interfaces';
 
 export const LogicApp = () => {
-    const [state, setState] = useState<any>();
-    const [form, setForm] = useState<IFormObject>(formObject);
+    const [appstate, setAppState] = useState<IAppState>(appState);
+    const [userstate, setUserState] = useState<IItem>(User);
+    const [search, setSearch] = useState<string>('');
 
-    // const url: string = `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_ADRESS}customer/index`;
+    const GetDataFetch = async () => {
+        const { email, password } = appstate;
 
-    // const GetDataFetch = async () => {
-    //     const rawData = await fetch(url, OptionsData);
-    //     const data = await rawData.json();
-    //     console.log(data);
-    //     // .then((response) => {
-    //     //     response.json();
-    //     // })
-    //     // .then((body) => {
-    //     //     console.log('from db', body);
-    //     // })
-    //     // .catch((error) => {
-    //     //     console.log('err', error.message);
-    //     // });
-    // };
+        setAppState((prev: IAppState) => ({ ...prev, fetching: true }));
+
+        const rawData = await fetch(loginUrl, LoginOptionsData(email, password));
+        const data = await rawData.json();
+        const customerRawData = await fetch(customerUrl, CustomerOptionsData(data.token));
+        const customerData = await customerRawData.json();
+
+        console.log({ data: customerData, raw: customerRawData });
+
+        setAppState((prev: IAppState) => ({
+            ...prev,
+            fetching: false,
+            token: data.token,
+            redirect: true,
+            email: '',
+            password: '',
+            items: customerData.items,
+        }));
+    };
+
     const onPressEnterSubmitAuth = (e: React.KeyboardEvent<HTMLFormElement>) => {
-        const { email, password } = form;
+        const { email, password } = appstate;
 
         if (e.key === 'Enter' && (email !== '' || password !== '')) {
-            console.log('fetch api', form);
-            setForm(formObject);
+            GetDataFetch();
         }
+        return;
     };
-    const onSubmitAuth = (e: React.FormEvent<HTMLFormElement>) => {
-        const { email, password } = form;
+    const onSubmitAuth = async (e: React.FormEvent<HTMLFormElement>) => {
+        const { email, password } = appstate;
         e.preventDefault();
         if (email !== '' || password !== '') {
-            console.log('fetch api', form);
-            setForm(formObject);
+            GetDataFetch();
         }
     };
 
-    useEffect(() => {
-        setState(Dummy);
-        // GetDataFetch();
-        // eslint-disable-next-line
-    }, []);
+    const AddUser = async () => {
+        const newUser = { ...userstate };
 
-    return { state, onSubmitAuth, onPressEnterSubmitAuth, setForm, form };
+        const newItems = [...appstate.items, newUser];
+
+        const rawData = await fetch(createUrl, CreateCustomerOptionsData(appstate.token, newUser));
+        const data = await rawData.json();
+
+        if (data.success) {
+            setAppState((prev: IAppState) => ({ ...prev, items: newItems, dialog: false }));
+            setUserState(User);
+            console.log(data);
+        }
+    };
+
+    const onClickCancel = () => {
+        setUserState(User);
+        setAppState((prev: IAppState) => ({ ...prev, dialog: false }));
+    };
+    const onClickSearch = () => {
+        if (search) {
+            console.log(search);
+        }
+    };
+
+    console.log(userstate, appstate);
+
+    return {
+        appstate,
+        userstate,
+        setSearch,
+        setUserState,
+        setAppState,
+        onSubmitAuth,
+        onPressEnterSubmitAuth,
+        onClickCancel,
+        onClickSearch,
+        AddUser,
+    };
 };

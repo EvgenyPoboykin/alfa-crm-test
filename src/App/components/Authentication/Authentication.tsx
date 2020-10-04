@@ -1,5 +1,6 @@
 import React, { memo, lazy, useContext } from 'react';
-import { ContextApp, IFormObject } from '../../state';
+import { Redirect } from 'react-router-dom';
+import { ContextApp, IAppState } from '../../state';
 
 const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
 const FormContainer = lazy(() => import('./style').then((mod) => ({ default: mod.FormContainer })));
@@ -8,16 +9,20 @@ const Form = lazy(() => import('./style').then((mod) => ({ default: mod.Form }))
 const Logotype = lazy(() => import('../Logotype'));
 const Input = lazy(() => import('../Input'));
 const Button = lazy(() => import('../Button'));
-const CheckboxWithText = lazy(() => import('../CheckboxWithText'));
+const Loader = lazy(() => import('../Loader'));
 
 const Authentication: React.FC = memo(() => {
     const {
         onSubmitAuth,
         onPressEnterSubmitAuth,
-        setForm,
-        form: { email, password, rememberMe },
+        setAppState,
+        appstate: { email, password, fetching, redirect },
     } = useContext(ContextApp);
-    return (
+
+    const preloadFetch = fetching ? <Loader /> : null;
+    return redirect ? (
+        <Redirect to='/customer' />
+    ) : (
         <Container>
             <FormContainer>
                 <Form onSubmit={onSubmitAuth} onKeyDown={onPressEnterSubmitAuth}>
@@ -25,20 +30,20 @@ const Authentication: React.FC = memo(() => {
                     <Input
                         placeholder='e-mail'
                         type='email'
-                        getValue={(value) => setForm((prev: IFormObject) => ({ ...prev, email: value }))}
+                        getValue={(value) => setAppState((prev: IAppState) => ({ ...prev, email: value }))}
                         defaultValue={email}
                     />
                     <Input
                         placeholder='api key'
                         type='password'
                         defaultValue={password}
-                        getValue={(value) => setForm((prev: IFormObject) => ({ ...prev, password: value }))}
+                        getValue={(value) => setAppState((prev: IAppState) => ({ ...prev, password: value }))}
                     />
-                    <Button name='АВТОРИЗОВАТЬСЯ' disable={email === '' || password === ''} />
-                    <CheckboxWithText
-                        name='Запомнить меня'
-                        value={rememberMe}
-                        getValue={(value) => setForm((prev: IFormObject) => ({ ...prev, rememberMe: value }))}
+                    <Button
+                        name='АВТОРИЗОВАТЬСЯ'
+                        color='blue'
+                        preloader={preloadFetch}
+                        disable={email === '' || password === ''}
                     />
                 </Form>
             </FormContainer>

@@ -1,4 +1,6 @@
 export interface IItem {
     item: IItem | any;
 }
-export interface IContainer {}
+export interface ITd {
+    colored?: boolean;
+}

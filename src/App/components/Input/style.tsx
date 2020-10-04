@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ISpan, IContainer } from './interfaces';
+import { ISpan, IContainer, IInputField } from './interfaces';
 
 export const Span = styled.span.attrs({ className: 'Input__container' })`
     position: absolute;
-    color: #b3b3b3;
+    color: ${(props: ISpan) => (props.red ? 'red' : '#b3b3b3')};
     font-size: 12px;
     text-transform: uppercase;
 
@@ -18,7 +18,7 @@ export const Span = styled.span.attrs({ className: 'Input__container' })`
 `;
 export const InputField = styled.input.attrs({ className: 'Input__container--input-field' })`
     width: 100%;
-    margin-top: 15px;
+    margin-top: ${(props: IInputField) => (props.visiblePlaceholder ? '15px' : '0px')};
     font-size: 1rem;
     font-weight: 500;
 

@@ -1,7 +1,7 @@
 export interface ICheckboxWithText {
     color?: string;
     name: string;
-    value?: boolean;
+    defaultValue?: boolean;
     getValue: (value: boolean) => void;
 }
 export interface ICheckbox {

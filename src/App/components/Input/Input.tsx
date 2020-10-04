@@ -5,27 +5,46 @@ const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Con
 const Span = lazy(() => import('./style').then((mod) => ({ default: mod.Span })));
 const InputField = lazy(() => import('./style').then((mod) => ({ default: mod.InputField })));
 
-const Input: React.FC<IInput> = ({ getValue, defaultValue, placeholder, type = 'text' }) => {
+const Input: React.FC<IInput> = ({ getValue, defaultValue, placeholder, type = 'text', visiblePlaceholder = true }) => {
     const [focus, SetFocus] = useState(false);
     const [value, SetValue] = useState('');
 
     const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        SetValue(value);
-        getValue(value);
+        const newValue = e.currentTarget.value;
+
+        SetValue(newValue);
+        getValue(newValue);
     };
 
     return (
         <Container focus={focus}>
-            <Span focus={focus || value !== '' ? true : false}>{placeholder}</Span>
+            {visiblePlaceholder ? (
+                <Span
+                    red={
+                        placeholder.toLocaleLowerCase() === 'e-mail' &&
+                        !value.toLocaleLowerCase().includes('@' && '.') &&
+                        value !== ''
+                    }
+                    focus={focus || value !== '' ? true : false}
+                >
+                    {placeholder}{' '}
+                    {placeholder.toLocaleLowerCase() === 'e-mail' &&
+                    !value.toLocaleLowerCase().includes('@' && '.') &&
+                    value !== ''
+                        ? ' @ не правильный формат почты'
+                        : null}
+                </Span>
+            ) : null}
             <InputField
-                value={defaultValue}
+                visiblePlaceholder={visiblePlaceholder}
+                defaultValue={defaultValue}
                 type={type}
                 onFocus={() => SetFocus(true)}
                 onBlur={() => SetFocus(false)}
                 onChange={onChangeInput}
                 autoComplete='new-password'
                 autoFill='false'
+                placeholder={visiblePlaceholder ? '' : placeholder}
             />
         </Container>
     );
