@@ -29,10 +29,10 @@ const Input: React.FC<IInput> = ({ getValue, defaultValue, placeholder, type = '
 
     useEffect(() => {
         if (type === 'date' && defaultValue === '') {
-            var d = new Date();
-            var mm = d.getMonth() + 1;
-            var dd = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
-            var yy = d.getFullYear();
+            const d = new Date();
+            const mm = d.getMonth() + 1;
+            const dd = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
+            const yy = d.getFullYear();
             SetValue(`${yy}-${mm}-${dd}`);
         }
     }, [value, defaultValue, type]);

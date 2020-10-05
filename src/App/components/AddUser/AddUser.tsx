@@ -43,7 +43,7 @@ const AddUser: React.FC<IAddUser> = () => {
                     type='email'
                 />
                 <Input
-                    placeholder='телефон без +7 через запятую'
+                    placeholder='телефон без +7, через запятую'
                     getValue={(value) => setUserState((prev: IItem) => ({ ...prev, phone: value.split(', ') }))}
                     defaultValue={phone.join(', ')}
                     type='phone'
