@@ -15,6 +15,7 @@ export const LogicApp = () => {
     const [appstate, setAppState] = useState<IAppState>(appState);
     const [userstate, setUserState] = useState<IItem>(User);
     const [itemsstate, setItemsState] = useState<any[]>(appstate.items);
+    const [items_origin_state, setOriginItemsState] = useState<any[]>(appstate.items);
     const [search, setSearch] = useState<string>('');
 
     const GetDataFetch = async () => {
@@ -46,6 +47,7 @@ export const LogicApp = () => {
 
             // console.log({ rawData, data, customerRawData, customerData });
             // setItemsState(items)
+            // setOriginItemsState(items)
             // setAppState((prev: IAppState) => ({
             //     ...prev,
             //     fetching: false,
@@ -65,6 +67,7 @@ export const LogicApp = () => {
             // console.log({ rawData, data, customerRawData, customerData });
 
             // setItemsState(items)
+            // setOriginItemsState(items)
             // setAppState((prev: IAppState) => ({
             //     ...prev,
             //     fetching: false,
@@ -129,15 +132,18 @@ export const LogicApp = () => {
 
     const onClickSearch = () => {
         console.log(search);
-        if (!search) return;
+        if (!search) return setItemsState(items_origin_state);
 
-        return itemsstate.filter((item) => {
+        const filterItems = items_origin_state.filter((item) => {
             return (
-                item['name'].toLowerCase().includes(search.toLowerCase()) ||
-                item['email'].toLowerCase().includes(search.toLowerCase()) ||
-                item['addr'].toLowerCase().includes(search.toLowerCase())
+                item['name'].toString().toLowerCase().includes(search.toLowerCase()) ||
+                item['email'].toString().toLowerCase().includes(search.toLowerCase()) ||
+                item['addr'].toString().toLowerCase().includes(search.toLowerCase()) ||
+                item['phone'].toString().toLowerCase().includes(search.toLowerCase())
             );
         });
+
+        setItemsState(filterItems);
     };
 
     useEffect(() => {
