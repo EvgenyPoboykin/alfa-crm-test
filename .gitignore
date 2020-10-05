@@ -7,7 +7,8 @@
 
 # testing
 /coverage
-
+/build
+/concept
 
 # misc
 .DS_Store
