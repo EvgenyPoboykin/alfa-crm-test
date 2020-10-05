@@ -1,6 +1,0 @@
-curl -i -X 'POST' -d '{"email":"test-task@alfacrm.pro","api_key":"9616c537-f7c9-11ea-a4f7-0cc47ae3c526"}' 'https://test.s20.online/v2api/auth/login'
-
-
-curl -i -X 'POST' -H 'X-ALFACRM-TOKEN: 4fadab6d9f447fdaa3f67b75bffa0b84' -d '{"lead_status_id":1,"page":0}' 'https://test.s20.online/v2api/customer/index'
-
-curl -i -X 'POST' -H 'X-ALFACRM-TOKEN: 7c73dfe01c298917aaefb1aa61681cbe' -d '{"name":"Test Customer","legal_type":1,"is_study":0}' 'https://test.s20.online/v2api/customer/create'

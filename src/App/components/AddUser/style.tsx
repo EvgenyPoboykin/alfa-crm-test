@@ -14,7 +14,7 @@ export const Container = styled.div.attrs({ className: 'AddUser__container' })`
     overflow: hidden;
 `;
 
-export const Form = styled.div.attrs({ className: 'AddUser__container--form' })`
+export const Form = styled.form.attrs({ className: 'AddUser__container--form' })`
     display: flex;
     flex-direction: column;
     justify-content: space-around;

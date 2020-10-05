@@ -12,7 +12,7 @@ const BtnControl = lazy(() => import('./style').then((mod) => ({ default: mod.Bt
 const Input = lazy(() => import('../Input'));
 const Button = lazy(() => import('../Button'));
 
-const AddUser: React.FC<IAddUser> = memo(() => {
+const AddUser: React.FC<IAddUser> = () => {
     const {
         appstate: { dialog },
         userstate: { name, dob, email, phone, addr },
@@ -39,18 +39,19 @@ const AddUser: React.FC<IAddUser> = memo(() => {
                 <Input
                     placeholder='электронная почта'
                     getValue={(value) => setUserState((prev: IItem) => ({ ...prev, email: value.split(', ') }))}
-                    defaultValue={email}
+                    defaultValue={email.join(', ')}
                     type='email'
                 />
                 <Input
-                    placeholder='телефон'
+                    placeholder='телефон без +7 через запятую'
                     getValue={(value) => setUserState((prev: IItem) => ({ ...prev, phone: value.split(', ') }))}
                     defaultValue={phone.join(', ')}
+                    type='phone'
                 />
                 <Input
                     placeholder='адрес'
                     getValue={(value) => setUserState((prev: IItem) => ({ ...prev, addr: value.split(', ') }))}
-                    defaultValue={addr}
+                    defaultValue={addr.join(', ')}
                 />
                 <BtnsControl>
                     <BtnControl>
@@ -70,5 +71,10 @@ const AddUser: React.FC<IAddUser> = memo(() => {
             <Bg onClick={() => setAppState((prev: IAppState) => ({ ...prev, dialog: false }))}></Bg>
         </Container>
     );
+};
+export default memo(AddUser, (prev, next) => {
+    if (prev !== next) {
+        return false;
+    }
+    return true;
 });
-export default AddUser;

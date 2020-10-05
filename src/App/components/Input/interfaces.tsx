@@ -16,3 +16,8 @@ export interface ISpan {
     focus: boolean;
     red: boolean;
 }
+
+export interface IErr {
+    display: boolean;
+    msg: string;
+}

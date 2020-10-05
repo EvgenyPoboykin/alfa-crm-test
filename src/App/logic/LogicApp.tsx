@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
     LoginOptionsData,
@@ -21,22 +21,50 @@ export const LogicApp = () => {
 
         setAppState((prev: IAppState) => ({ ...prev, fetching: true }));
 
-        const rawData = await fetch(loginUrl, LoginOptionsData(email, password));
-        const data = await rawData.json();
-        const customerRawData = await fetch(customerUrl, CustomerOptionsData(data.token));
-        const customerData = await customerRawData.json();
+        if (appstate.token === '') {
+            // console.log('fetching without login');
+            const option: any = LoginOptionsData(email, password);
+            const rawData = await fetch(loginUrl, option);
 
-        console.log({ data: customerData, raw: customerRawData });
+            // console.log(rawData);
+            const data = await rawData.json();
 
-        setAppState((prev: IAppState) => ({
-            ...prev,
-            fetching: false,
-            token: data.token,
-            redirect: true,
-            email: '',
-            password: '',
-            items: customerData.items,
-        }));
+            const optionC = CustomerOptionsData(data.token);
+            const customerRawData = await fetch(customerUrl, optionC);
+            const customerData = await customerRawData.json();
+
+            // console.log({ rawData, data, customerRawData, customerData });
+
+            localStorage.setItem('token', data.token);
+
+            // console.log({ rawData, data, customerRawData, customerData });
+
+            setAppState((prev: IAppState) => ({
+                ...prev,
+                fetching: false,
+                token: data.token,
+                redirect: true,
+                email: '',
+                password: '',
+                items: customerData.items,
+            }));
+        } else {
+            console.log('fetching with login');
+
+            const customerRawData = await fetch(customerUrl, CustomerOptionsData(appstate.token));
+            const customerData = await customerRawData.json();
+
+            // console.log({ rawData, data, customerRawData, customerData });
+
+            setAppState((prev: IAppState) => ({
+                ...prev,
+                fetching: false,
+                redirect: true,
+                email: '',
+                password: '',
+                items: customerData.items,
+            }));
+        }
     };
 
     const onPressEnterSubmitAuth = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -55,13 +83,16 @@ export const LogicApp = () => {
         }
     };
 
-    const AddUser = async () => {
+    const AddUser = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         const newUser = { ...userstate };
 
         const newItems = [...appstate.items, newUser];
 
         const rawData = await fetch(createUrl, CreateCustomerOptionsData(appstate.token, newUser));
         const data = await rawData.json();
+
+        console.log({ rawData, data });
 
         if (data.success) {
             setAppState((prev: IAppState) => ({ ...prev, items: newItems, dialog: false }));
@@ -70,17 +101,27 @@ export const LogicApp = () => {
         }
     };
 
-    const onClickCancel = () => {
+    const onClickCancel = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setUserState(User);
         setAppState((prev: IAppState) => ({ ...prev, dialog: false }));
     };
+
     const onClickSearch = () => {
         if (search) {
             console.log(search);
         }
     };
 
-    console.log(userstate, appstate);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (token !== null) {
+            setAppState((prev: IAppState) => ({ ...prev, token: token }));
+        }
+    }, []);
+
+    // console.log(userstate, appstate);
 
     return {
         appstate,

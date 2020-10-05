@@ -1,43 +1,53 @@
-import React, { lazy, memo, useState } from 'react';
-import { IInput } from './interfaces';
+import React, { lazy, memo, useState, useEffect } from 'react';
+import { IInput, IErr } from './interfaces';
 
 const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
 const Span = lazy(() => import('./style').then((mod) => ({ default: mod.Span })));
 const InputField = lazy(() => import('./style').then((mod) => ({ default: mod.InputField })));
 
 const Input: React.FC<IInput> = ({ getValue, defaultValue, placeholder, type = 'text', visiblePlaceholder = true }) => {
-    const [focus, SetFocus] = useState(false);
-    const [value, SetValue] = useState('');
+    const [focus, SetFocus] = useState<boolean>(false);
+    const [value, SetValue] = useState<string>(defaultValue);
+    const [err, SetErr] = useState<IErr>({ display: false, msg: '' });
 
     const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.currentTarget.value;
 
-        SetValue(newValue);
-        getValue(newValue);
+        if (type === 'email') {
+            import('./validate').then((mod) => {
+                mod.EmailAddress(newValue, SetErr, SetValue, getValue);
+            });
+        } else if (type === 'phone') {
+            import('./validate').then((mod) => {
+                mod.Phone(newValue, SetErr, SetValue, getValue);
+            });
+        } else {
+            SetValue(newValue);
+            getValue(newValue);
+        }
     };
 
+    useEffect(() => {
+        if (type === 'date' && defaultValue === '') {
+            var d = new Date();
+            var mm = d.getMonth() + 1;
+            var dd = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
+            var yy = d.getFullYear();
+            SetValue(`${yy}-${mm}-${dd}`);
+        } else {
+            SetValue(defaultValue);
+        }
+    }, [value, defaultValue, type]);
     return (
         <Container focus={focus}>
             {visiblePlaceholder ? (
-                <Span
-                    red={
-                        placeholder.toLocaleLowerCase() === 'e-mail' &&
-                        !value.toLocaleLowerCase().includes('@' && '.') &&
-                        value !== ''
-                    }
-                    focus={focus || value !== '' ? true : false}
-                >
-                    {placeholder}{' '}
-                    {placeholder.toLocaleLowerCase() === 'e-mail' &&
-                    !value.toLocaleLowerCase().includes('@' && '.') &&
-                    value !== ''
-                        ? ' @ не правильный формат почты'
-                        : null}
+                <Span red={err.display} focus={focus || value !== '' ? true : false}>
+                    {placeholder} {err.display ? err.msg : null}
                 </Span>
             ) : null}
             <InputField
                 visiblePlaceholder={visiblePlaceholder}
-                defaultValue={defaultValue}
+                value={value}
                 type={type}
                 onFocus={() => SetFocus(true)}
                 onBlur={() => SetFocus(false)}

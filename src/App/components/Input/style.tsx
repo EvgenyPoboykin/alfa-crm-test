@@ -21,8 +21,9 @@ export const InputField = styled.input.attrs({ className: 'Input__container--inp
     margin-top: ${(props: IInputField) => (props.visiblePlaceholder ? '15px' : '0px')};
     font-size: 1rem;
     font-weight: 500;
-
+    font-family: Roboto, sans-serif;
     background-color: #fff;
+
     &:focus ${Span} {
         margin-top: -20px;
         font-size: 10px;
