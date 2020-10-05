@@ -24,7 +24,9 @@ export const LogicApp = () => {
         if (appstate.token === '') {
             // console.log('fetching without login');
             const option: any = LoginOptionsData(email, password);
+            console.log({ option });
             const rawData = await fetch(loginUrl, option);
+            console.log({ rawData });
 
             // console.log(rawData);
             const data = await rawData.json();
@@ -36,6 +38,8 @@ export const LogicApp = () => {
             // console.log({ rawData, data, customerRawData, customerData });
 
             localStorage.setItem('token', data.token);
+            localStorage.setItem('email', appstate.email);
+            localStorage.setItem('password', appstate.password);
 
             // console.log({ rawData, data, customerRawData, customerData });
 
@@ -84,8 +88,8 @@ export const LogicApp = () => {
     };
 
     const AddUser = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
         const newUser = { ...userstate };
+        e.preventDefault();
 
         const newItems = [...appstate.items, newUser];
 
@@ -95,8 +99,8 @@ export const LogicApp = () => {
         console.log({ rawData, data });
 
         if (data.success) {
-            setAppState((prev: IAppState) => ({ ...prev, items: newItems, dialog: false }));
             setUserState(User);
+            setAppState((prev: IAppState) => ({ ...prev, items: newItems, dialog: false }));
             console.log(data);
         }
     };
@@ -114,14 +118,21 @@ export const LogicApp = () => {
     };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const email: any = localStorage.getItem('email');
+        const password: any = localStorage.getItem('password');
+        const token: any = localStorage.getItem('token');
 
-        if (token !== null) {
-            setAppState((prev: IAppState) => ({ ...prev, token: token }));
+        if (token !== null && email !== null && password !== null) {
+            setAppState((prev: IAppState) => ({
+                ...prev,
+                token: token,
+                password: password,
+                email: email,
+            }));
         }
     }, []);
 
-    // console.log(userstate, appstate);
+    console.log(userstate, appstate);
 
     return {
         appstate,

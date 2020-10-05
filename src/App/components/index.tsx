@@ -13,4 +13,21 @@ import HeaderDescription from './HeaderDescription';
 import HeaderDescriptionItem from './HeaderDescriptionItem';
 import LoaderPage from './LoaderPage';
 import AddUser from './AddUser';
-export { ItemList, SearchInput, Item, Routers, Authentication, Logotype, Input, Button, CheckboxWithText, Loader, Header, HeaderDescription, HeaderDescriptionItem, LoaderPage, AddUser };
+
+export {
+    ItemList,
+    SearchInput,
+    Item,
+    Routers,
+    Authentication,
+    Logotype,
+    Input,
+    Button,
+    CheckboxWithText,
+    Loader,
+    Header,
+    HeaderDescription,
+    HeaderDescriptionItem,
+    LoaderPage,
+    AddUser,
+};

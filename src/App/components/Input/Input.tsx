@@ -1,4 +1,4 @@
-import React, { lazy, memo, useState, useEffect } from 'react';
+import React, { lazy, useState, useEffect } from 'react';
 import { IInput, IErr } from './interfaces';
 
 const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
@@ -34,10 +34,9 @@ const Input: React.FC<IInput> = ({ getValue, defaultValue, placeholder, type = '
             var dd = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
             var yy = d.getFullYear();
             SetValue(`${yy}-${mm}-${dd}`);
-        } else {
-            SetValue(defaultValue);
         }
     }, [value, defaultValue, type]);
+
     return (
         <Container focus={focus}>
             {visiblePlaceholder ? (
@@ -52,16 +51,11 @@ const Input: React.FC<IInput> = ({ getValue, defaultValue, placeholder, type = '
                 onFocus={() => SetFocus(true)}
                 onBlur={() => SetFocus(false)}
                 onChange={onChangeInput}
-                autoComplete='new-password'
+                autoComplete={`new-${type}`}
                 autoFill='false'
                 placeholder={visiblePlaceholder ? '' : placeholder}
             />
         </Container>
     );
 };
-export default memo(Input, (prev, next) => {
-    if (prev !== next) {
-        return false;
-    }
-    return true;
-});
+export default Input;

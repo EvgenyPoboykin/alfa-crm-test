@@ -17,6 +17,7 @@ export const EmailAddress = (value: string, _setErr: any, _setValue: any, _getVa
         _getValue(value);
         _setErr((prev: IErr) => ({ ...prev, display: false, msg: '' }));
     } else {
+        _setValue(value);
         _setErr((prev: IErr) => ({ ...prev, display: true, msg: ' / адрес электронной почты введен неправильно!' }));
     }
 };
