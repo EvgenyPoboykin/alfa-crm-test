@@ -8,15 +8,15 @@ const DAY = 86400000;
 const Tr = lazy(() => import('./style').then((mod) => ({ default: mod.Tr })));
 const Td = lazy(() => import('./style').then((mod) => ({ default: mod.Td })));
 
-const Item: React.FC<IItem> = memo(({ item: { name, dob, balance, e_date, email, phone, addr, registr_date } }) => {
+const Item: React.FC<IItem> = memo(({ item: { name, dob, balance, e_date, email, phone, addr, b_date } }) => {
     const now = new Date();
-    const date = new Date(e_date);
-    const registr = new Date(registr_date);
+    const deactivate_date = new Date(e_date);
+    const registration_date = new Date(b_date);
 
     const ColorBgItem = () => {
-        if (date.getTime() < now.getTime()) {
+        if (deactivate_date.getTime() < now.getTime()) {
             return 3;
-        } else if (now.getTime() < registr.getTime() + DAY) {
+        } else if (now.getTime() < registration_date.getTime() + DAY) {
             return 2;
         } else {
             return 1;

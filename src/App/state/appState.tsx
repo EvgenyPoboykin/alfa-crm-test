@@ -14,7 +14,7 @@ export const appState: IAppState = {
             name: 'evgeny',
             phone: ['+7 (908) 665-97-22'],
             balance: '0.0',
-            registr_date: '2020-09-03',
+            b_date: '2020-09-03',
         },
         {
             id: 'upiouip',
@@ -28,7 +28,7 @@ export const appState: IAppState = {
             legal_type: 1,
             name: 'wewewr',
             phone: ['+7 (908) 665-97-22'],
-            registr_date: '2020-10-05',
+            b_date: '2020-10-05',
         },
         {
             addr: ['From Magic'],
@@ -42,7 +42,7 @@ export const appState: IAppState = {
             legal_type: 1,
             name: 'Maru',
             phone: ['+7 (909) 123-45-67'],
-            registr_date: '2020-07-09',
+            b_date: '2020-07-09',
         },
         {
             addr: ['From here'],
@@ -56,7 +56,7 @@ export const appState: IAppState = {
             legal_type: 1,
             name: 'Mil',
             phone: ['+7 (900) 111-22-33'],
-            registr_date: '2020-10-05',
+            b_date: '2020-10-05',
         },
         {
             addr: ['LA'],
@@ -70,7 +70,7 @@ export const appState: IAppState = {
             legal_type: 1,
             name: 'Vlad',
             phone: ['+7 (000) 111-22-33'],
-            registr_date: '2020-10-05',
+            b_date: '2020-10-05',
         },
     ],
     email: '',
