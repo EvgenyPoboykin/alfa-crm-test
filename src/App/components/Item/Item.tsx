@@ -1,29 +1,12 @@
-import React, { memo, lazy } from 'react';
-
+import React from 'react';
 import { IItem } from './interfaces';
+import LogicItem from './logic';
+import { Tr, Td } from './style';
 
-const DAY = 86400000;
-
-// styled
-const Tr = lazy(() => import('./style').then((mod) => ({ default: mod.Tr })));
-const Td = lazy(() => import('./style').then((mod) => ({ default: mod.Td })));
-
-const Item: React.FC<IItem> = memo(({ item: { name, dob, balance, e_date, email, phone, addr, b_date } }) => {
-    const now = new Date();
-    const deactivate_date = new Date(e_date);
-    const registration_date = new Date(b_date);
-
-    const ColorBgItem = () => {
-        if (deactivate_date.getTime() < now.getTime()) {
-            return 3;
-        } else if (now.getTime() < registration_date.getTime() + DAY) {
-            return 2;
-        } else {
-            return 1;
-        }
-    };
+const Item: React.FC<IItem> = ({ item: { name, dob, balance, e_date, email, phone, addr, b_date } }) => {
+    const { ColoredBgItem } = LogicItem(e_date, b_date);
     return (
-        <Tr bg={ColorBgItem()}>
+        <Tr bg={ColoredBgItem()}>
             <Td>{name}</Td>
             <Td>{dob}</Td>
             <Td colored={parseFloat(balance) > 0}>{balance} &#8381;</Td>
@@ -33,5 +16,5 @@ const Item: React.FC<IItem> = memo(({ item: { name, dob, balance, e_date, email,
             <Td>{addr}</Td>
         </Tr>
     );
-});
+};
 export default Item;

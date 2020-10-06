@@ -1,13 +1,10 @@
-import React, { lazy, memo } from 'react';
+import React from 'react';
 import { IHeaderDescription } from './interfaces';
-
+import { Container } from './style';
+import HeaderDescriptionItem from '../HeaderDescriptionItem';
 import { info } from './info';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-
-const HeaderDescriptionItem = lazy(() => import('../HeaderDescriptionItem'));
-
-const HeaderDescription: React.FC<IHeaderDescription> = memo(() => {
+const HeaderDescription: React.FC<IHeaderDescription> = () => {
     return (
         <Container>
             <HeaderDescriptionItem job='job' desc={info.job} />
@@ -15,5 +12,5 @@ const HeaderDescription: React.FC<IHeaderDescription> = memo(() => {
             <HeaderDescriptionItem job='stack' desc={info.stack} />
         </Container>
     );
-});
+};
 export default HeaderDescription;

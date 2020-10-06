@@ -4,6 +4,7 @@ export interface IInput {
     getValue: (value: string) => void;
     defaultValue: any;
     visiblePlaceholder?: boolean;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 export interface IContainer {
     focus: boolean;

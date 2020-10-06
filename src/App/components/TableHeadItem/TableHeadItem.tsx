@@ -1,10 +1,9 @@
-import React, { lazy, memo, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ContextApp } from '../../state';
 import { ITableHeadItem } from './interfaces';
+import { Th } from './style';
 
-const Th = lazy(() => import('./style').then((mod) => ({ default: mod.Th })));
-
-const TableHeadItem: React.FC<ITableHeadItem> = memo(({ name, field }) => {
+const TableHeadItem: React.FC<ITableHeadItem> = ({ name, field }) => {
     const [sortOrder, setSortOrder] = useState(false);
     const { onClickFilter } = useContext(ContextApp);
 
@@ -15,5 +14,5 @@ const TableHeadItem: React.FC<ITableHeadItem> = memo(({ name, field }) => {
     };
 
     return <Th onClick={onClick}>{name}</Th>;
-});
+};
 export default TableHeadItem;

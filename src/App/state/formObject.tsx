@@ -5,6 +5,6 @@ export const formObject: IFormObject = {
     password: '',
     rememberMe: false,
     fetching: false,
-    token: '345353454',
+    token: '',
     redirect: true,
 };

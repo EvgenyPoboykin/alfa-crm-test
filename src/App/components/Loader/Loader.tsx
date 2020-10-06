@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Container, Div } from './style';
 import { ILoader } from './interfaces';
 
-const Loader: React.FC<ILoader> = memo(() => {
+const Loader: React.FC<ILoader> = () => {
     return (
         <Container>
             <Div></Div>
@@ -11,5 +11,5 @@ const Loader: React.FC<ILoader> = memo(() => {
             <Div></Div>
         </Container>
     );
-});
+};
 export default Loader;

@@ -1,21 +1,14 @@
-import React, { lazy, memo, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ContextApp, IAppState, IItem } from '../../state';
 import { IAddUser } from './interfaces';
-
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-const Bg = lazy(() => import('./style').then((mod) => ({ default: mod.Bg })));
-const Form = lazy(() => import('./style').then((mod) => ({ default: mod.Form })));
-const FormName = lazy(() => import('./style').then((mod) => ({ default: mod.FormName })));
-const BtnsControl = lazy(() => import('./style').then((mod) => ({ default: mod.BtnsControl })));
-const BtnControl = lazy(() => import('./style').then((mod) => ({ default: mod.BtnControl })));
-
-const Input = lazy(() => import('../Input'));
-const Button = lazy(() => import('../Button'));
+import { Container, Form, FormName, BtnControl, BtnsControl, Bg } from './style';
+import Input from '../Input';
+import Button from '../Button';
 
 const AddUser: React.FC<IAddUser> = () => {
     const {
-        appstate: { dialog },
-        userstate: { name, dob, email, phone, addr },
+        app_state: { dialog },
+        user_state: { name, dob, email, phone, addr },
         setUserState,
         setAppState,
         AddUser,
@@ -72,9 +65,4 @@ const AddUser: React.FC<IAddUser> = () => {
         </Container>
     );
 };
-export default memo(AddUser, (prev, next) => {
-    if (prev !== next) {
-        return false;
-    }
-    return true;
-});
+export default AddUser;

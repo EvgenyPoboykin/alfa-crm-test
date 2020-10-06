@@ -1,18 +1,13 @@
-import React, { lazy, memo, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ContextApp, IAppState } from '../../state';
+import { Container, Content, Btn, BtnContainer } from './style';
+import Header from '../Header';
+import SearchInput from '../SearchInput';
+import ItemList from '../ItemList';
+import Button from '../Button';
+import AddUser from '../AddUser';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-const Content = lazy(() => import('./style').then((mod) => ({ default: mod.Content })));
-const Btn = lazy(() => import('./style').then((mod) => ({ default: mod.Btn })));
-const BtnContainer = lazy(() => import('./style').then((mod) => ({ default: mod.BtnContainer })));
-
-const Header = lazy(() => import('../Header'));
-const SearchInput = lazy(() => import('../SearchInput'));
-const ItemList = lazy(() => import('../ItemList'));
-const Button = lazy(() => import('../Button'));
-const AddUser = lazy(() => import('../AddUser'));
-
-const Page: React.FC = memo(() => {
+const Page: React.FC = () => {
     const { setAppState } = useContext(ContextApp);
     return (
         <Container>
@@ -33,5 +28,5 @@ const Page: React.FC = memo(() => {
             </Content>
         </Container>
     );
-});
+};
 export default Page;

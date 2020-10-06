@@ -1,17 +1,15 @@
-import React, { lazy, memo } from 'react';
+import React from 'react';
 import { IHeader } from './interfaces';
+import { Container } from './style';
+import Logotype from '../Logotype';
+import HeaderDescription from '../HeaderDescription';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-
-const Logotype = lazy(() => import('../Logotype'));
-const HeaderDescription = lazy(() => import('../HeaderDescription'));
-
-const Header: React.FC<IHeader> = memo(() => {
+const Header: React.FC<IHeader> = () => {
     return (
         <Container>
             <Logotype />
             <HeaderDescription />
         </Container>
     );
-});
+};
 export default Header;

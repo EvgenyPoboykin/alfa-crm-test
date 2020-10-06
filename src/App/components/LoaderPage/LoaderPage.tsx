@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Container } from './style';
 import { ILoaderPage } from './interfaces';
 import Loader from '../Loader/Loader';
 
-const LoaderPage: React.FC<ILoaderPage> = memo(() => {
+const LoaderPage: React.FC<ILoaderPage> = () => {
     return (
         <Container>
             <Loader />
         </Container>
     );
-});
+};
 export default LoaderPage;

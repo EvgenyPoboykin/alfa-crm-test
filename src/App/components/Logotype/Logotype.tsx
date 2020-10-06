@@ -1,14 +1,12 @@
-import React, { lazy, memo } from 'react';
+import React from 'react';
 import { ILogotype } from './interfaces';
+import { Container, Logo } from './style';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-const Logo = lazy(() => import('./style').then((mod) => ({ default: mod.Logotype })));
-
-const Logotype: React.FC<ILogotype> = memo(() => {
+const Logotype: React.FC<ILogotype> = () => {
     return (
         <Container>
             <Logo />
         </Container>
     );
-});
+};
 export default Logotype;

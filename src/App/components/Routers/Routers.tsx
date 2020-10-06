@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { routersMap } from './routersMap';
 import { IRouters } from './interfaces';
 
-const Routers: React.FC<IRouters> = memo(() => {
+const Routers: React.FC<IRouters> = () => {
     return (
         <Switch>
             {routersMap.map(({ id, path, component }) => (
@@ -11,5 +11,5 @@ const Routers: React.FC<IRouters> = memo(() => {
             ))}
         </Switch>
     );
-});
+};
 export default Routers;

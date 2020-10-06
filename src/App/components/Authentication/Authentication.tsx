@@ -1,26 +1,24 @@
-import React, { memo, lazy, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ContextApp, IAppState } from '../../state';
+import { Container, Form, FormContainer } from './style';
+import Logotype from '../Logotype';
+import Input from '../Input';
+import Button from '../Button';
+import Loader from '../Loader';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-const FormContainer = lazy(() => import('./style').then((mod) => ({ default: mod.FormContainer })));
-const Form = lazy(() => import('./style').then((mod) => ({ default: mod.Form })));
-
-const Logotype = lazy(() => import('../Logotype'));
-const Input = lazy(() => import('../Input'));
-const Button = lazy(() => import('../Button'));
-const Loader = lazy(() => import('../Loader'));
-
-const Authentication: React.FC = memo(() => {
+const Authentication: React.FC = () => {
     const {
         onSubmitAuth,
         onPressEnterSubmitAuth,
         setAppState,
-        appstate: { email, password, fetching, redirect },
+        app_state: { email, password },
+        fetching,
+        redirect_from_form,
     } = useContext(ContextApp);
 
     const preloadFetch = fetching ? <Loader /> : null;
-    return redirect ? (
+    return redirect_from_form ? (
         <Redirect to='/customer' />
     ) : (
         <Container>
@@ -49,5 +47,5 @@ const Authentication: React.FC = memo(() => {
             </FormContainer>
         </Container>
     );
-});
+};
 export default Authentication;

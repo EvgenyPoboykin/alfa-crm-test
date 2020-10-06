@@ -1,15 +1,12 @@
-import React, { lazy, memo, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ContextApp } from '../../state';
 import { ISearchInput } from './interfaces';
+import { Content, Container, BtnContainer } from './style';
+import Button from '../Button';
+import Input from '../Input';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-const Content = lazy(() => import('./style').then((mod) => ({ default: mod.Content })));
-const BtnContainer = lazy(() => import('./style').then((mod) => ({ default: mod.BtnContainer })));
-const Input = lazy(() => import('../Input'));
-const Button = lazy(() => import('../Button'));
-
-const SearchInput: React.FC<ISearchInput> = memo(() => {
-    const { onClickSearch, setSearch } = useContext(ContextApp);
+const SearchInput: React.FC<ISearchInput> = () => {
+    const { onClickSearch, setSearch, onKeyDownSearch } = useContext(ContextApp);
     return (
         <Container>
             <Content>
@@ -18,6 +15,7 @@ const SearchInput: React.FC<ISearchInput> = memo(() => {
                     defaultValue=''
                     getValue={(value) => setSearch(value)}
                     visiblePlaceholder={false}
+                    onKeyDown={onKeyDownSearch}
                 />
                 <BtnContainer>
                     <Button name='поиск' onClick={onClickSearch} />
@@ -25,5 +23,5 @@ const SearchInput: React.FC<ISearchInput> = memo(() => {
             </Content>
         </Container>
     );
-});
+};
 export default SearchInput;

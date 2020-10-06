@@ -46,6 +46,5 @@ export interface IAppState {
     fetching: boolean;
     token: string;
     redirect: boolean;
-    items: any[];
     dialog: boolean;
 }

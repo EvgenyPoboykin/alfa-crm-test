@@ -1,11 +1,8 @@
-import React, { lazy, memo } from 'react';
+import React from 'react';
 import { IButton } from './interfaces';
+import { Container, Btn, Name } from './style';
 
-const Container = lazy(() => import('./style').then((mod) => ({ default: mod.Container })));
-const Btn = lazy(() => import('./style').then((mod) => ({ default: mod.Btn })));
-const Name = lazy(() => import('./style').then((mod) => ({ default: mod.Name })));
-
-const Button: React.FC<IButton> = memo(({ onClick, preloader, name, color = 'blue', disable }) => {
+const Button: React.FC<IButton> = ({ onClick, preloader, name, color = 'blue', disable }) => {
     return (
         <Container>
             <Btn color={color} disable={disable} onClick={onClick}>
@@ -14,5 +11,5 @@ const Button: React.FC<IButton> = memo(({ onClick, preloader, name, color = 'blu
             </Btn>
         </Container>
     );
-});
+};
 export default Button;

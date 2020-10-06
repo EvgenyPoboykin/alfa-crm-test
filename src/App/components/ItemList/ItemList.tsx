@@ -1,22 +1,16 @@
-import React, { lazy, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { IItemList } from './interfaces';
 import { ContextApp } from '../../state';
 
-// styled
-const Table = lazy(() => import('./style').then((mod) => ({ default: mod.Table })));
-const THead = lazy(() => import('./style').then((mod) => ({ default: mod.THead })));
-const TBody = lazy(() => import('./style').then((mod) => ({ default: mod.TBody })));
-const Tr = lazy(() => import('./style').then((mod) => ({ default: mod.Tr })));
-
-// components
-const Item = lazy(() => import('../Item'));
-const TableHeadItem = lazy(() => import('../TableHeadItem'));
+import { Tr, TBody, THead, Table } from './style';
+import Item from '../Item';
+import TableHeadItem from '../TableHeadItem';
 
 const ItemList: React.FC<IItemList> = () => {
     const {
-        appstate: { token },
-        itemsstate,
+        app_state: { token },
+        items_state,
     } = useContext(ContextApp);
 
     return token === '' ? (
@@ -35,7 +29,7 @@ const ItemList: React.FC<IItemList> = () => {
                 </Tr>
             </THead>
             <TBody>
-                {itemsstate.map((item: any, index: number) => (
+                {items_state.map((item: any, index: number) => (
                     <Item key={index} item={item} />
                 ))}
             </TBody>
