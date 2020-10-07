@@ -2,10 +2,7 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ContextApp, IAppState } from '../../state';
 import { Container, Form, FormContainer } from './style';
-import Logotype from '../Logotype';
-import Input from '../Input';
-import Button from '../Button';
-import Loader from '../Loader';
+import { Logotype, Input, Button, Loader } from '../../components';
 
 const Authentication: React.FC = () => {
     const {

@@ -3,15 +3,11 @@ import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { ContextApp, IAppState } from '../../state';
 import { Container, Content, Btn, BtnContainer } from './style';
-import Header from '../Header';
-import SearchInput from '../SearchInput';
-import ItemList from '../ItemList';
-import Button from '../Button';
-import AddUser from '../AddUser';
-import Paginate from '../Paginate';
+import { Header, SearchInput, ItemList, Button, AddUser, Paginate } from '../../components';
+
 const clientCount = 32;
 
-const Page: React.FC = () => {
+const Clients: React.FC = () => {
     const {
         setAppState,
         app_state: { isAuth, currentPage },
@@ -61,4 +57,4 @@ const Page: React.FC = () => {
         <Redirect to='/' />
     );
 };
-export default Page;
+export default Clients;
