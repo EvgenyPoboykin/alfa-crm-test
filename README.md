@@ -55,14 +55,14 @@
 
 ```json
 {
-    name: '',
-    email: '',
-    dob: '',
-    phone: [],
-    addr: [],
-    branch_ids = [1],
-    is_study = 1,
-    legal_type = 1
+    "name": "",
+    "email": "",
+    "dob": "",
+    "phone": [],
+    "addr": [],
+    "branch_ids": [1],
+    "is_study": 1,
+    "legal_type": 1
 }
 ```
 
