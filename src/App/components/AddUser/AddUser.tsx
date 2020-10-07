@@ -4,16 +4,20 @@ import { IAddUser } from './interfaces';
 import { Container, Form, FormName, BtnControl, BtnsControl, Bg } from './style';
 import Input from '../Input';
 import Button from '../Button';
+import Loader from '../Loader';
 
 const AddUser: React.FC<IAddUser> = () => {
     const {
-        app_state: { dialog },
+        app_state: { dialog, fetching },
         user_state: { name, dob, email, phone, addr },
         setUserState,
         setAppState,
         AddUser,
         onClickCancel,
     } = useContext(ContextApp);
+
+    const preloadFetch = fetching ? <Loader /> : null;
+
     return (
         <Container dialog={dialog}>
             <Form>
@@ -57,6 +61,7 @@ const AddUser: React.FC<IAddUser> = () => {
                             }
                             name='добавить'
                             onClick={AddUser}
+                            preloader={preloadFetch}
                         />
                     </BtnControl>
                 </BtnsControl>

@@ -15,20 +15,5 @@ import LoaderPage from './LoaderPage';
 import AddUser from './AddUser';
 
 import TableHeadItem from './TableHeadItem';
-export {
-    ItemList,
-    SearchInput,
-    Item,
-    Routers,
-    Authentication,
-    Logotype,
-    Input,
-    Button,
-    Loader,
-    Header,
-    HeaderDescription,
-    HeaderDescriptionItem,
-    LoaderPage,
-    AddUser,
-    TableHeadItem,
-};
+import Paginate from './Paginate';
+export { ItemList, SearchInput, Item, Routers, Authentication, Logotype, Input, Button, Loader, Header, HeaderDescription, HeaderDescriptionItem, LoaderPage, AddUser, TableHeadItem, Paginate };

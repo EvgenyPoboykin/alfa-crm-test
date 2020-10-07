@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import {} from './interfaces';
 
+export const Container = styled.div.attrs({ className: 'ItemList__container' })`
+    display: flex;
+    width: 100%;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+`;
 export const Table = styled.table.attrs({ className: 'ItemList__container' })`
     padding-top: 20px;
 `;

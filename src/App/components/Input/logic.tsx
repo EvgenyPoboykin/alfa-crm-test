@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IErr } from './interfaces';
 import { EmailAddress, Phone } from './validate';
 
@@ -14,21 +14,19 @@ const LogicInput = (defaultValue: number | string, type: string, getValue: (valu
             EmailAddress(newValue, SetErr, SetValue, getValue);
         } else if (type === 'phone') {
             Phone(newValue, SetErr, SetValue, getValue);
+        } else if (type === 'date') {
+            const d = new Date(newValue);
+            // const mm = d.getMonth() + 1;
+            // const dd = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
+            // const yy = d.getFullYear();
+            // const dob = `${dd}-${mm}-${yy}`;
+            SetValue(newValue);
+            getValue(d.toString());
         } else {
             SetValue(newValue);
             getValue(newValue);
         }
     };
-
-    useEffect(() => {
-        if (type === 'date' && defaultValue === '') {
-            const d = new Date();
-            const mm = d.getMonth() + 1;
-            const dd = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
-            const yy = d.getFullYear();
-            SetValue(`${yy}-${mm}-${dd}`);
-        }
-    }, [value, defaultValue, type]);
 
     return { err, focus, value, onChangeInput, SetFocus };
 };

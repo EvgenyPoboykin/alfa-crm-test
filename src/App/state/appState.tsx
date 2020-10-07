@@ -8,6 +8,8 @@ export const appState: IAppState = {
     token: '',
     redirect: false,
     dialog: false,
+    isAuth: false,
+    currentPage: 0,
 };
 // items: [
 //     {

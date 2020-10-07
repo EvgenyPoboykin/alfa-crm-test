@@ -12,13 +12,11 @@ const Authentication: React.FC = () => {
         onSubmitAuth,
         onPressEnterSubmitAuth,
         setAppState,
-        app_state: { email, password },
-        fetching,
-        redirect_from_form,
+        app_state: { email, password, fetching, redirect },
     } = useContext(ContextApp);
 
     const preloadFetch = fetching ? <Loader /> : null;
-    return redirect_from_form ? (
+    return redirect ? (
         <Redirect to='/customer' />
     ) : (
         <Container>

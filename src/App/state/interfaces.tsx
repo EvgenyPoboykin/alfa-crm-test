@@ -18,18 +18,14 @@ export interface ILoginOptionsData {
 }
 
 export interface IItem {
-    id: string;
     name: string;
     dob: string;
-    e_date: string;
     phone: any[];
     email: any[];
     addr: any[];
     branch_ids: any[];
     legal_type: number;
     is_study: number;
-    balance: string;
-    registr_date: string;
 }
 
 export interface IData {
@@ -47,4 +43,6 @@ export interface IAppState {
     token: string;
     redirect: boolean;
     dialog: boolean;
+    isAuth: boolean;
+    currentPage: number;
 }
