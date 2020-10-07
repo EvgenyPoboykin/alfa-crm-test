@@ -25,3 +25,4 @@ command.txt
 
 ..firebaserc
 firebase.json
+yarn.lock
