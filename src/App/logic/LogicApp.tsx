@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import _ from 'lodash';
 
-import { appState, IAppState, User } from '../state';
-import { IItem } from '../state/interfaces';
+import { appState, IAppState, IItem, User } from '../state';
 
 import fetchToken from './fetching/fetchToken';
 import fetchData from './fetching/fetchData';
@@ -42,8 +41,6 @@ export const LogicApp = () => {
             setItemsState(items);
             setAppState((prev: IAppState) => ({ ...prev, dialog: false, fetching: false }));
         }
-
-        console.log({ rawData });
     };
 
     const onPressEnterSubmitAuth = (e: React.KeyboardEvent<HTMLFormElement>) => {
