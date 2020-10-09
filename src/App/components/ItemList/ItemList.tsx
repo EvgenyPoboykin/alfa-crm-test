@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { lazy } from 'react';
 
 import { IItemList } from './interfaces';
 
-import { Tr, TBody, THead, Table } from './style';
-import Item from '../Item';
-import TableHeadItem from '../TableHeadItem';
-import { Container } from './style';
+const Item = lazy(() => import('../Item'));
+const TableHeadItem = lazy(() => import('../TableHeadItem'));
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Tr = lazy(() => import('./style').then((m) => ({ default: m.Tr })));
+const TBody = lazy(() => import('./style').then((m) => ({ default: m.TBody })));
+const THead = lazy(() => import('./style').then((m) => ({ default: m.THead })));
+const Table = lazy(() => import('./style').then((m) => ({ default: m.Table })));
 
 const ItemList: React.FC<IItemList> = ({ DisplayData }) => {
     return (

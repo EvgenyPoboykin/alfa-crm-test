@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { IButton } from './interfaces';
-import { Container, Btn, Name } from './style';
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Btn = lazy(() => import('./style').then((m) => ({ default: m.Btn })));
+const Name = lazy(() => import('./style').then((m) => ({ default: m.Name })));
 
 const Button: React.FC<IButton> = ({ onClick, preloader, name, color = 'blue', disable }) => {
     return (

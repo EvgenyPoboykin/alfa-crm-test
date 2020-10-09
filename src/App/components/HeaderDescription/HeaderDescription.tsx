@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { IHeaderDescription } from './interfaces';
-import { Container } from './style';
-import HeaderDescriptionItem from '../HeaderDescriptionItem';
-import { info } from './info';
+
+const HeaderDescriptionItem = lazy(() => import('../HeaderDescriptionItem'));
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+
+const info = {
+    job: 'TEST WORK',
+    developer: 'Evgeny Poboykin',
+    stack: 'React, TypeScript, styled-components',
+};
 
 const HeaderDescription: React.FC<IHeaderDescription> = () => {
     return (

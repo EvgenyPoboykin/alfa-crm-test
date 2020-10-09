@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { ILogotype } from './interfaces';
-import { Container, Logo } from './style';
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Logo = lazy(() => import('./style').then((m) => ({ default: m.Logo })));
 
 const Logotype: React.FC<ILogotype> = () => {
     return (

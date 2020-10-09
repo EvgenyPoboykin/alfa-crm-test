@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { IHeaderDescriptionItem } from './interfaces';
-import { Container, Job, Desc } from './style';
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Job = lazy(() => import('./style').then((m) => ({ default: m.Job })));
+const Desc = lazy(() => import('./style').then((m) => ({ default: m.Desc })));
 
 const HeaderDescriptionItem: React.FC<IHeaderDescriptionItem> = ({ desc, job }) => {
     return (

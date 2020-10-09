@@ -1,8 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ContextApp, IAppState } from '../../state';
-import { Container, Form, FormContainer } from './style';
-import { Logotype, Input, Button, Loader } from '../../components';
+
+const Logotype = lazy(() => import('../../components').then((m) => ({ default: m.Logotype })));
+const Input = lazy(() => import('../../components').then((m) => ({ default: m.Input })));
+const Button = lazy(() => import('../../components').then((m) => ({ default: m.Button })));
+const Loader = lazy(() => import('../../components').then((m) => ({ default: m.Loader })));
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Form = lazy(() => import('./style').then((m) => ({ default: m.Form })));
+const FormContainer = lazy(() => import('./style').then((m) => ({ default: m.FormContainer })));
 
 const Authentication: React.FC = () => {
     const {

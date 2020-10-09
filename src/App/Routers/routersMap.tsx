@@ -1,5 +1,7 @@
-import Authentication from '../Pages/Authentication';
-import Clients from '../Pages/Clients';
+import { lazy } from 'react';
+
+const Authentication = lazy(() => import('../Pages/Authentication'));
+const Clients = lazy(() => import('../Pages/Clients'));
 
 export const routersMap = [
     { id: 1, path: '/', component: Authentication },

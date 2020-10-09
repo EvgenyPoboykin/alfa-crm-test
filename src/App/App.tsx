@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { LoaderPage } from './components';
 import { Logic } from './logic';
 
-import Routers from './Routers';
+const Routers = lazy(() => import('./Routers'));
 
 const App: React.FC = () => {
     return (
-        <Logic>
-            <BrowserRouter>
-                <Routers />
-            </BrowserRouter>
-        </Logic>
+        <Suspense fallback={<LoaderPage />}>
+            <Logic>
+                <BrowserRouter>
+                    <Routers />
+                </BrowserRouter>
+            </Logic>
+        </Suspense>
     );
 };
 

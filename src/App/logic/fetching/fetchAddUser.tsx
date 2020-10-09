@@ -1,6 +1,6 @@
 import { CreateCustomerOptionsData, createUrl } from './logger';
 
-const fetchAddUser = async (token: string, user: any) => {
+export const fetchAddUser = async (token: string, user: any) => {
     const option: any = CreateCustomerOptionsData(token, user);
 
     const rawData = await fetch(createUrl, option);
@@ -8,5 +8,3 @@ const fetchAddUser = async (token: string, user: any) => {
 
     return data;
 };
-
-export default fetchAddUser;

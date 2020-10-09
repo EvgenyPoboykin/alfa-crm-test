@@ -1,10 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy } from 'react';
 import { ContextApp, IAppState, IItem } from '../../state';
 import { IAddUser } from './interfaces';
-import { Container, Form, FormName, BtnControl, BtnsControl, Bg } from './style';
-import Input from '../Input';
-import Button from '../Button';
-import Loader from '../Loader';
+
+const Input = lazy(() => import('../Input'));
+const Button = lazy(() => import('../Button'));
+const Loader = lazy(() => import('../Loader'));
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Form = lazy(() => import('./style').then((m) => ({ default: m.Form })));
+const FormName = lazy(() => import('./style').then((m) => ({ default: m.FormName })));
+const BtnControl = lazy(() => import('./style').then((m) => ({ default: m.BtnControl })));
+const BtnsControl = lazy(() => import('./style').then((m) => ({ default: m.BtnsControl })));
+const Bg = lazy(() => import('./style').then((m) => ({ default: m.Bg })));
 
 const AddUser: React.FC<IAddUser> = () => {
     const {

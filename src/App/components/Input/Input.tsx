@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { IInput } from './interfaces';
 import LogicInput from './logic';
-import { Container, Span, InputField } from './style';
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Span = lazy(() => import('./style').then((m) => ({ default: m.Span })));
+const InputField = lazy(() => import('./style').then((m) => ({ default: m.InputField })));
 
 const Input: React.FC<IInput> = ({
     getValue,

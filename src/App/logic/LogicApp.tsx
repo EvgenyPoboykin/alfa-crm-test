@@ -3,10 +3,6 @@ import _ from 'lodash';
 
 import { appState, IAppState, IItem, User } from '../state';
 
-import fetchToken from './fetching/fetchToken';
-import fetchData from './fetching/fetchData';
-import fetchAddUser from './fetching/fetchAddUser';
-
 export const LogicApp = () => {
     const [app_state, setAppState] = useState<IAppState>(appState);
     const [user_state, setUserState] = useState<IItem>(User);
@@ -18,8 +14,12 @@ export const LogicApp = () => {
 
         setAppState((prev: any) => ({ ...prev, fetching: true }));
 
+        const { fetchToken } = await import('./fetching/fetchToken');
         const token = await fetchToken(email, password);
+
+        const { fetchData } = await import('./fetching/fetchData');
         const items = await fetchData(token);
+
         setItemsState([...items]);
         setAppState((prev: any) => ({
             ...prev,
@@ -33,9 +33,12 @@ export const LogicApp = () => {
     const AddUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setAppState((prev: any) => ({ ...prev, fetching: true }));
+
+        const { fetchAddUser } = await import('./fetching/fetchAddUser');
         const rawData = await fetchAddUser(app_state.token, user_state);
 
         if (rawData.success) {
+            const { fetchData } = await import('./fetching/fetchData');
             const items = await fetchData(app_state.token);
             setUserState(User);
             setItemsState(items);

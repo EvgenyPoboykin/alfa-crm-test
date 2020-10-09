@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { IItem } from './interfaces';
 import LogicItem from './logic';
-import { Tr, Td } from './style';
+
+const Tr = lazy(() => import('./style').then((m) => ({ default: m.Tr })));
+const Td = lazy(() => import('./style').then((m) => ({ default: m.Td })));
 
 const Item: React.FC<IItem> = ({ item: { name, dob, balance, e_date, email, phone, addr, b_date } }) => {
     const { ColoredBgItem } = LogicItem(e_date, b_date);

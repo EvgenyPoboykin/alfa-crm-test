@@ -1,8 +1,9 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, lazy } from 'react';
 import ReactPaginate from 'react-paginate';
 import { IPaginate } from './interfaces';
 import { ContextApp } from '../../state';
-import { Container } from './style';
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
 
 const Paginate: React.FC<IPaginate> = memo(({ countPage }) => {
     const {

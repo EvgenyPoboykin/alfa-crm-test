@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from './style';
 import { ILoaderPage } from './interfaces';
-import Loader from '../Loader/Loader';
+import Loader from '../Loader';
 
 const LoaderPage: React.FC<ILoaderPage> = () => {
     return (

@@ -1,9 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy } from 'react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { ContextApp, IAppState } from '../../state';
-import { Container, Content, Btn, BtnContainer } from './style';
-import { Header, SearchInput, ItemList, Button, AddUser, Paginate } from '../../components';
+
+const Header = lazy(() => import('../../components').then((m) => ({ default: m.Header })));
+const SearchInput = lazy(() => import('../../components').then((m) => ({ default: m.SearchInput })));
+const ItemList = lazy(() => import('../../components').then((m) => ({ default: m.ItemList })));
+const Button = lazy(() => import('../../components').then((m) => ({ default: m.Button })));
+const AddUser = lazy(() => import('../../components').then((m) => ({ default: m.AddUser })));
+const Paginate = lazy(() => import('../../components').then((m) => ({ default: m.Paginate })));
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Content = lazy(() => import('./style').then((m) => ({ default: m.Content })));
+const Btn = lazy(() => import('./style').then((m) => ({ default: m.Btn })));
+const BtnContainer = lazy(() => import('./style').then((m) => ({ default: m.BtnContainer })));
 
 const clientCount = 32;
 

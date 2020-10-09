@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy } from 'react';
 import { ContextApp, IAppState } from '../../state';
 import { ISearchInput } from './interfaces';
-import { Content, Container } from './style';
 
-import Input from '../Input';
+const Input = lazy(() => import('../Input'));
+
+const Container = lazy(() => import('./style').then((m) => ({ default: m.Container })));
+const Content = lazy(() => import('./style').then((m) => ({ default: m.Content })));
 
 const SearchInput: React.FC<ISearchInput> = () => {
     const { setSearch, onKeyDownSearch, setAppState } = useContext(ContextApp);
