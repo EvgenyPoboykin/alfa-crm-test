@@ -20,7 +20,7 @@ export const Container = styled.div.attrs({ className: 'Button__container' })`
     border-radius: 6px;
     overflow: hidden;
 `;
-export const Btn = styled.button.attrs({ className: 'Button__container--button' })`
+export const Btn = styled.button.attrs({ className: 'Button__container--button' })<IBtn>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,15 +28,15 @@ export const Btn = styled.button.attrs({ className: 'Button__container--button' 
     max-height: 60px;
     height: 100%;
 
-    ${(props: IBtn) =>
-        props.disable
+    ${({disable, color}) =>
+        disable
             ? `background-color: #999999; pointer-event: none; `
             : `
             cursor: pointer;
             pointer-event: all;
-            background-color: ${props.color ? colorsBtn(props.color) : '#999999'};
+            background-color: ${color ? colorsBtn(color) : '#999999'};
 &:hover {
-        background-color: ${props.color ? colorsHoverBtn(props.color) : '#999999'};
+        background-color: ${color ? colorsHoverBtn(color) : '#999999'};
     }
     `}
 

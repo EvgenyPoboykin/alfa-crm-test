@@ -19,15 +19,15 @@ const ColorBg = (number: number) => {
     }
 };
 
-export const Tr = styled.tr.attrs({ className: 'Item__container--tr' })`
+export const Tr = styled.tr.attrs({ className: 'Item__container--tr' })<ITr>`
     height: 60px;
     &:hover {
         background: #f2f2f2;
     }
 
-    ${(props: ITr) => props.bg && ColorBg(props.bg)}
+    ${({bg}) => bg && ColorBg(bg)}
 `;
-export const Td = styled.td.attrs({ className: 'Item__container--td' })`
+export const Td = styled.td.attrs({ className: 'Item__container--td' })<ITd>`
     padding: 0px 20px;
     text-align: center;
     font-size: 0.75rem;
@@ -37,9 +37,9 @@ export const Td = styled.td.attrs({ className: 'Item__container--td' })`
         max-width: 400px;
     }
     &:nth-child(3) {
-        color: ${(props: ITd) => (props.colored ? '#2182f6' : 'red')};
+        color: ${({colored}) => (colored ? '#2182f6' : 'red')};
     }
     &:nth-child(4) {
-        color: ${(props: ITd) => (props.colored ? '#2182f6' : 'red')};
+        color: ${({colored}) => (colored ? '#2182f6' : 'red')};
     }
 `;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { IContainer } from './interfaces';
 
-export const Container = styled.div.attrs({ className: 'AddUser__container' })`
-    display: ${(props: IContainer) => (props.dialog ? 'flex' : 'none')};
+export const Container = styled.div.attrs({ className: 'AddUser__container' })<IContainer>`
+    display: ${({dialog}) => (dialog ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
     width: 100%;

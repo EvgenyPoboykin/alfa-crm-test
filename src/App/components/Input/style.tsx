@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { ISpan, IContainer, IInputField } from './interfaces';
 
-export const Span = styled.span.attrs({ className: 'Input__container' })`
+export const Span = styled.span.attrs({ className: 'Input__container' })<ISpan>`
     position: absolute;
-    color: ${(props: ISpan) => (props.red ? 'red' : '#b3b3b3')};
+    color: ${({red}) => (red ? 'red' : '#b3b3b3')};
     font-size: 12px;
     text-transform: uppercase;
 
-    ${(props: ISpan) =>
-        props.focus &&
+    ${({focus}) =>
+        focus &&
         `
         margin-top: -20px;
         font-size: 10px;
@@ -16,9 +16,9 @@ export const Span = styled.span.attrs({ className: 'Input__container' })`
 
     transition: all 300ms cubic-bezier(0.5, 0, 0, 1);
 `;
-export const InputField = styled.input.attrs({ className: 'Input__container--input-field' })`
+export const InputField = styled.input.attrs({ className: 'Input__container--input-field' })<IInputField>`
     width: 100%;
-    margin-top: ${(props: IInputField) => (props.visiblePlaceholder ? '15px' : '0px')};
+    margin-top: ${({visiblePlaceholder}) => (visiblePlaceholder ? '15px' : '0px')};
     font-size: 1rem;
     font-weight: 500;
     font-family: Roboto, sans-serif;
@@ -30,7 +30,7 @@ export const InputField = styled.input.attrs({ className: 'Input__container--inp
     }
 `;
 
-export const Container = styled.div.attrs({ className: 'Input__container' })`
+export const Container = styled.div.attrs({ className: 'Input__container' })<IContainer>`
     display: flex;
     align-items: center;
     width: 100%;
@@ -41,8 +41,8 @@ export const Container = styled.div.attrs({ className: 'Input__container' })`
     border-radius: 6px;
     position: relative;
 
-    ${(props: IContainer) =>
-        props.focus &&
+    ${({focus}) =>
+        focus &&
         `
         border: 2px solid #2182f6;
     `}
